@@ -1,0 +1,6 @@
+GITHUB_ACCESS_TOKEN: XXXXX
+REPOSITORY: 'org/repo'
+PROJECT_NUMBER: 1
+COLUMN_NAMES:
+  - Backlog
+MESSAGE: 'no story point'
