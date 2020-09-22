@@ -25,12 +25,12 @@ end
 
 def fetch_projects_by(project_number)
   projects = github_client.projects(repository)
-  projects.find { |project| project.number == project_number }
+  projects.find { |p| p.number == project_number }
 end
 
 def fetch_columns_by(project_id)
   columns = github_client.project_columns(project_id)
-  columns.select { |column| config['COLUMN_NAMES'].include?(column.name) }
+  columns.select { |c| config['COLUMN_NAMES'].include?(c.name) }
 end
 
 def fetch_issue_by(card)
