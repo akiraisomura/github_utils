@@ -4,3 +4,11 @@ PROJECT_NUMBER: 1
 COLUMN_NAMES:
   - Backlog
 MESSAGE: 'no story point'
+MENTION_RULES:
+#  CREATOR:
+#    IF:
+#      SUBJECTS:
+#        - hoge
+#    THEN:
+#      TARGETS:
+#        - fuga

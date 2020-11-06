@@ -18,9 +18,21 @@ def check_story_point_in_the_title(column_cards)
     issue = fetch_issue_by(card)
     next if issue.title.match(/\[\d+\]/)
 
-    github_client.add_comment(repository, issue.number, "@#{card.creator.login} #{config['MESSAGE']}")
+    mention_target = decide_mention_target(card)
+    github_client.add_comment(repository, issue.number, "@#{mention_target} #{config['MESSAGE']}")
     sleep 0.5 # to avoid rate limit
   end
+end
+
+def decide_mention_target(card)
+  target = card.creator.login
+
+  mention_rules = config['MENTION_RULES']
+  if mention_rules && mention_rules['CREATOR']
+    creator_rules = mention_rules['CREATOR']
+    target = creator_rules['THEN']['TARGETS'].sample if creator_rules['IF']['SUBJECTS'].include?(target)
+  end
+  target
 end
 
 def fetch_projects_by(project_number)
