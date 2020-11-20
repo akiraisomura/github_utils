@@ -1,5 +1,7 @@
 name: Style check
 
+on: push
+
 jobs:
   build:
     steps:
