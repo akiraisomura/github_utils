@@ -8,7 +8,7 @@ def main
   target_columns = fetch_columns_by(target_project.id)
 
   target_columns.each do |column|
-    column_cards = github_client.column_cards(column.id)
+    column_cards = github_client.column_cards(column.id, accept_preview_header)
     check_story_point_in_the_title(column_cards)
   end
 end
@@ -36,12 +36,12 @@ def decide_mention_target(card)
 end
 
 def fetch_projects_by(project_number)
-  projects = github_client.projects(repository)
+  projects = github_client.projects(repository, accept_preview_header)
   projects.find { |p| p.number == project_number }
 end
 
 def fetch_columns_by(project_id)
-  columns = github_client.project_columns(project_id)
+  columns = github_client.project_columns(project_id, accept_preview_header)
   columns.select { |c| config['COLUMN_NAMES'].include?(c.name) }
 end
 
@@ -60,6 +60,10 @@ end
 
 def config
   @config ||= YAML.load_file('config.yml')
+end
+
+def accept_preview_header
+  { accept: 'application/vnd.github.inertia-preview+json' }
 end
 
 main
