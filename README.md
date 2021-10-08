@@ -20,6 +20,9 @@ github util is a ruby script list for dealing with github issue.
   - PROJECT_NUMBER: your project number (https://github.com/hoge/huga/projects/1)
   - COLUMN_NAMES: column name list that you want to check
   - MESSAGE: message when no story point was found
+  - MENTION_RULES: you can customize mention rules by adding MENTION_RULES->CLASS
+    - class must have decide_mention_target method
+    - if you don't add class, mention target is issue creator 
 
 4. bundle exec ruby check_story_point_in_the_title.rb
 ```

@@ -2,6 +2,8 @@
 
 require 'octokit'
 require 'yaml'
+require 'active_support/all'
+Dir[File.dirname(__FILE__) + '/mention_rules/*.rb'].each {|file| require file }
 
 def main
   target_project = fetch_projects_by(config['PROJECT_NUMBER'])
@@ -25,14 +27,17 @@ def check_story_point_in_the_title(column_cards)
 end
 
 def decide_mention_target(card)
-  target = card.creator.login
+  return card.creator.login unless mention_rule_class
 
+  mention_rule_class.decide_mention_target(card)
+end
+
+def mention_rule_class
   mention_rules = config['MENTION_RULES']
-  if mention_rules && mention_rules['CREATOR']
-    creator_rules = mention_rules['CREATOR']
-    target = creator_rules['THEN']['TARGETS'].sample if creator_rules['IF']['SUBJECTS'].include?(target)
-  end
-  target
+  return unless mention_rules
+  return unless mention_rules['CLASS']
+
+  @mention_rule_class ||= mention_rules['CLASS'].constantize.new
 end
 
 def fetch_projects_by(project_number)

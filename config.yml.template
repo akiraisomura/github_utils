@@ -5,10 +5,7 @@ COLUMN_NAMES:
   - Backlog
 MESSAGE: 'no story point'
 MENTION_RULES:
-#  CREATOR:
-#    IF:
-#      SUBJECTS:
-#        - hoge
-#    THEN:
-#      TARGETS:
-#        - fuga
+  CLASS: DecideTargetBySubjectsAndMonth
+CREATORS:
+  - hoge
+SPREADSHEET_KEY: XXXXXXXX
