@@ -19,7 +19,7 @@ def main
 end
 
 def check_story_point_in_the_title(issue)
-  next if issue.title.match(/\[\d+\]/)
+  return if issue.title.match(/\[\d+\]/)
 
   mention_target = decide_mention_target(issue)
   github_client.add_comment(repository, issue[:content][:number], "@#{mention_target} #{config['MESSAGE']}")
