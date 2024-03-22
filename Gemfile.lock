@@ -12,8 +12,12 @@ GEM
     ast (2.4.1)
     concurrent-ruby (1.1.9)
     declarative (0.0.20)
+    dotenv (3.1.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    faraday-retry (1.0.3)
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     google-apis-core (0.4.1)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.16.2, < 2.a)
@@ -102,9 +106,13 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  dotenv
+  faraday
+  faraday-retry
+  faraday_middleware
   google_drive
   octokit (~> 4.0)
   rubocop
 
 BUNDLED WITH
-   1.16.1
+   2.5.6

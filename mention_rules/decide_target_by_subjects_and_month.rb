@@ -4,8 +4,7 @@ require 'google_drive'
 require 'yaml'
 
 class DecideTargetBySubjectsAndMonth
-  def decide_mention_target(card)
-    creator = card.creator.login
+  def decide_mention_target(creator)
     return creator unless creator.in?(config['CREATORS'])
 
     ws = spreadsheet.worksheets[0]
