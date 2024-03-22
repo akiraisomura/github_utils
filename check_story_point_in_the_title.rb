@@ -27,9 +27,10 @@ def check_story_point_in_the_title(column_cards)
 end
 
 def decide_mention_target(card)
-  return card.creator.login unless mention_rule_class
+  creator = card.creator.login
+  return creator unless mention_rule_class
 
-  mention_rule_class.decide_mention_target(card)
+  mention_rule_class.decide_mention_target(creator)
 end
 
 def mention_rule_class
