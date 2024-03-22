@@ -50,7 +50,8 @@ def fetch_issues
   body = {
     query: query
   }
-  github_connection.post("/graphql", body)
+  result = github_connection.post("/graphql", body)
+  result.body[:data][:node][:items][:nodes].select { |n| n[:type] == "ISSUE" }
 end
 
 def query
